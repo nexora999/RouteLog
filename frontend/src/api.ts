@@ -12,7 +12,7 @@ async function readError(response: Response): Promise<string> {
 }
 
 export async function suggestLocations(query: string) {
-  const url = `${API_BASE}/api/geocode/?q=${encodeURIComponent(query)}`
+  const url = `${API_BASE}/geocode/?q=${encodeURIComponent(query)}`
   const response = await fetch(url)
   if (!response.ok) throw new Error(await readError(response))
   const data = (await response.json()) as {
@@ -22,7 +22,7 @@ export async function suggestLocations(query: string) {
 }
 
 export async function planTrip(payload: TripPayload): Promise<PlanResponse> {
-  const response = await fetch(`${API_BASE}/api/plan/`, {
+  const response = await fetch(`${API_BASE}/plan/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
